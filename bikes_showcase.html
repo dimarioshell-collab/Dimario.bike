@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <title>Чотири велосипеди. Один вершник. — Dimario Bike Master</title>
+    <meta name="description" content="Галерея авторських збірок велосипедів Dimario Bike Master: хардтейл, двопідвіс MTB та fatbike під замовлення. Реальні збірки з підбором компонентів під стиль їзди." />
+    <meta name="keywords" content="збірка велосипеда, MTB хардтейл, двопідвіс велосипед, fatbike, кастомний велосипед Україна, Dimario Bike Master" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Dimario Bike Master" />
+    <link rel="canonical" href="https://dimario.online/bikes_showcase.html" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta property="og:title" content="Чотири велосипеди. Один вершник. — Dimario Bike Master" />
+    <meta property="og:description" content="Галерея авторських збірок велосипедів під замовлення: MTB, двопідвіс, fatbike." />
+    <meta property="og:image" content="https://dimario.online/images/kona-supreme.jpg" />
+    <meta property="og:url" content="https://dimario.online/bikes_showcase.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:site_name" content="Dimario Bike Master" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Чотири велосипеди. Один вершник. — Dimario Bike Master" />
+    <meta name="twitter:description" content="Галерея авторських збірок велосипедів під замовлення: MTB, двопідвіс, fatbike." />
+    <meta name="twitter:image" content="https://dimario.online/images/kona-supreme.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --dirt: #b8860b;
+        --rust: #c0392b;
+        --steel: #8a9ba8;
+        --black: #0a0a0a;
+        --white: #f0ece4;
+        --accent: #e8c84a;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: var(--black);
+        font-family: "Barlow Condensed", sans-serif;
+        overflow: hidden;
+        cursor: none;
+      }
+
+      /* Custom cursor */
+      .cursor {
+        position: fixed;
+        width: 12px;
+        height: 12px;
+        border: 2px solid var(--accent);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s;
+        mix-blend-mode: difference;
+      }
+
+      /* INTRO SCREEN */
+      #intro {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--black);
+        z-index: 100;
+        animation: introOut 0.8s ease-in-out 4s forwards;
+      }
+
+      #intro::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255, 255, 255, 0.015) 2px,
+          rgba(255, 255, 255, 0.015) 4px
+        );
+        pointer-events: none;
+      }
+
+      .intro-line {
+        overflow: hidden;
+        margin: 4px 0;
+      }
+
+      .intro-text {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(48px, 12vw, 120px);
+        color: var(--white);
+        letter-spacing: 0.1em;
+        line-height: 0.9;
+        transform: translateY(100%);
+        animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .intro-text:nth-child(1) {
+        animation-delay: 0.3s;
+      }
+      .intro-text:nth-child(2) {
+        animation-delay: 0.5s;
+        color: var(--accent);
+      }
+      .intro-text:nth-child(3) {
+        animation-delay: 0.7s;
+      }
+
+      .intro-sub {
+        margin-top: 24px;
+        font-size: 30px;
+        letter-spacing: 0.4em;
+        color: var(--steel);
+        text-transform: uppercase;
+        opacity: 0;
+        animation: fadeIn 0.5s ease 1.4s forwards;
+        text-align: center;
+      }
+
+      .intro-copy {
+        font-size: 30px;
+        color: var(--color-muted);
+        font-family: var(--font-mono);
+        margin-top: 1%;
+        text-align: center;
+      }
+
+      .intro-links {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 55px;
+      }
+
+      .intro-links a {
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--color-muted);
+        transition: color 0.3s;
+        text-align: center;
+      }
+
+      .intro-links a:hover {
+        color: var(--color-white);
+      }
+
+      @keyframes slideUp {
+        to {
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes barFill {
+        to {
+          width: 100%;
+        }
+      }
+      @keyframes introOut {
+        to {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+
+      /* MAIN SHOWCASE */
+      #showcase {
+        position: fixed;
+        inset: 0;
+        opacity: 0;
+        animation: fadeIn 1s ease 4.5s forwards;
+      }
+
+      /* SLIDES */
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        opacity: 0;
+        transition: opacity 0s;
+      }
+
+      .slide.active {
+        opacity: 1;
+        animation: slideEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .slide.exit {
+        animation: slideExit 0.6s ease-in forwards;
+      }
+
+      @keyframes slideEnter {
+        from {
+          opacity: 0;
+          transform: scale(1.05);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes slideExit {
+        from {
+          opacity: 1;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: scale(0.97);
+        }
+      }
+
+      /* BG IMAGE */
+      .slide-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        transform: scale(1.08);
+        animation: bgDrift 8s ease-out forwards;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      @keyframes bgDrift {
+        to {
+          transform: scale(1);
+        }
+      }
+
+      /* GRAIN OVERLAY */
+      .slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+        opacity: 0.4;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+      }
+
+      /* SLIDE CONTENT */
+      .slide-content {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: clamp(24px, 5vw, 60px);
+        width: 100%;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.92) 0%,
+          rgba(0, 0, 0, 0.4) 40%,
+          transparent 70%
+        );
+      }
+
+      .bike-number {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(80px, 20vw, 200px);
+        line-height: 0.8;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+        position: absolute;
+        top: clamp(16px, 4vw, 40px);
+        right: clamp(16px, 4vw, 40px);
+        pointer-events: none;
+        letter-spacing: -0.02em;
+      }
+
+      .bike-tag {
+        font-size: 11px;
+        letter-spacing: 0.5em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 8px;
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      .slide.active .bike-tag {
+        animation: tagIn 0.5s ease 0.3s forwards;
+      }
+
+      .bike-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(36px, 9vw, 88px);
+        color: var(--white);
+        line-height: 0.9;
+        letter-spacing: 0.02em;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .slide.active .bike-name {
+        animation: nameIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+      }
+
+      .bike-specs {
+        margin-top: 12px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        opacity: 0;
+      }
+
+      .slide.active .bike-specs {
+        animation: fadeIn 0.5s ease 0.7s forwards;
+      }
+
+      .spec-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .spec-label {
+        font-size: 9px;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--steel);
+      }
+
+      .spec-value {
+        font-size: clamp(13px, 2.5vw, 16px);
+        font-weight: 600;
+        color: var(--white);
+        letter-spacing: 0.05em;
+      }
+
+      .spec-accent {
+        color: var(--accent);
+      }
+
+      .divider {
+        width: 40px;
+        height: 2px;
+        background: var(--accent);
+        margin: 16px 0;
+        opacity: 0;
+      }
+
+      .slide.active .divider {
+        animation:
+          divIn 0.4s ease 0.6s forwards,
+          divGrow 0.6s ease 0.6s forwards;
+      }
+
+      @keyframes divIn {
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes divGrow {
+        from {
+          width: 0;
+        }
+        to {
+          width: 40px;
+        }
+      }
+
+      @keyframes tagIn {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes nameIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* SLIDE COLORS */
+      .slide-1 .bike-tag {
+        color: #e8c84a;
+      }
+      .slide-1 .divider {
+        background: #e8c84a;
+      }
+      .slide-2 .bike-tag {
+        color: yellowgreen;
+      }
+      .slide-2 .divider {
+        background: #c0392b;
+      }
+      .slide-3 .bike-tag {
+        color: #5dade2;
+      }
+      .slide-3 .divider {
+        background: #5dade2;
+      }
+
+      /* NAV DOTS */
+      .nav-dots {
+        position: fixed;
+        right: clamp(16px, 3vw, 32px);
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 50;
+        opacity: 0;
+        animation: fadeIn 0.5s ease 5s forwards;
+      }
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+      }
+
+      .dot::before {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 1px solid transparent;
+        transition: border-color 0.3s;
+      }
+
+      .dot.active {
+        background: var(--accent);
+        transform: scale(1.4);
+      }
+
+      .dot.active::before {
+        border-color: var(--accent);
+      }
+
+      /* PROGRESS BAR */
+      .progress-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        width: 100%;
+        z-index: 50;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: var(--accent);
+        transition: width 0.3s ease;
+        width: 33.33%;
+      }
+
+      /* BIKE COUNTER */
+      .counter {
+        position: fixed;
+        top: clamp(16px, 3vw, 32px);
+        left: clamp(16px, 3vw, 32px);
+        z-index: 50;
+        opacity: 0;
+        animation: fadeIn 0.5s ease 5s forwards;
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+      }
+
+      .counter-current {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 48px;
+        color: var(--white);
+        line-height: 1;
+      }
+
+      .counter-sep {
+        font-size: 14px;
+        color: var(--steel);
+      }
+
+      .counter-total {
+        font-size: 20px;
+        color: var(--steel);
+        font-family: "Bebas Neue", sans-serif;
+      }
+
+      /* BOTTOM LABEL */
+      .bottom-label {
+        position: fixed;
+        bottom: 20px;
+        right: clamp(16px, 3vw, 32px);
+        font-size: 10px;
+        letter-spacing: 0.4em;
+        color: rgba(255, 255, 255, 0.2);
+        text-transform: uppercase;
+        z-index: 50;
+        opacity: 0;
+        animation: fadeIn 0.5s ease 5.5s forwards;
+      }
+
+      /* ARROWS */
+      .arrow {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 50;
+        background: none;
+        border: none;
+        cursor: pointer;
+        opacity: 0;
+        animation: fadeIn 0.5s ease 5s forwards;
+        padding: 16px;
+      }
+
+      .arrow-left {
+        left: clamp(8px, 2vw, 20px);
+      }
+      .arrow-right {
+        right: clamp(40px, 6vw, 70px);
+      }
+
+      .arrow svg {
+        width: 24px;
+        height: 24px;
+        stroke: rgba(255, 255, 255, 0.4);
+        fill: none;
+        stroke-width: 1.5;
+        transition: stroke 0.2s;
+      }
+
+      .arrow:hover svg {
+        stroke: var(--accent);
+      }
+
+      /* SLIDE IMAGES via bg */
+      .slide-1 .slide-bg {
+        background-image: url("images/magellansid.jpg");
+      }
+      .slide-2 .slide-bg {
+        background-image: url("images/magellan.jpg");
+      }
+      .slide-3 .slide-bg {
+        background-image: url("images/kona-supreme.jpg");
+      }
+      .slide-4 .slide-bg {
+        background-image: url("images/hammers2000.jpg");
+      }
+
+      /* AUTO TIMER LINE */
+      .timer-line {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: var(--accent);
+        z-index: 200;
+        width: 0%;
+        opacity: 0;
+      }
+
+      .timer-line.running {
+        animation: timerFill 6s linear forwards;
+      }
+
+      @keyframes timerFill {
+        from {
+          width: 0%;
+          opacity: 1;
+        }
+        to {
+          width: 100%;
+          opacity: 1;
+        }
+      }
+
+      /* SWIPE HINT */
+      .swipe-hint {
+        position: fixed;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 10px;
+        letter-spacing: 0.4em;
+        color: rgba(255, 255, 255, 0.25);
+        text-transform: uppercase;
+        z-index: 50;
+        opacity: 0;
+        animation:
+          fadeIn 0.5s ease 5.5s forwards,
+          fadeOut 0.5s ease 9s forwards;
+      }
+
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="chatbot.css" />
+    <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="sr-only">Чотири велосипеди. Один вершник. Авторські збірки Dimario Bike Master: MTB, двопідвіс, fatbike</h1>
+    <div class="cursor" id="cursor"></div>
+
+    <!-- INTRO -->
+    <div id="intro">
+      <div class="intro-line"><div class="intro-text">FOUR</div></div>
+      <div class="intro-line"><div class="intro-text">BIKES.</div></div>
+      <div class="intro-line"><div class="intro-text">ONE RIDER.</div></div>
+      <div class="intro-sub">
+        MTB · Custom Builds · Since 2005 -2022
+        <div class="intro-links">
+          <a href="https://t.me/+YOs8HjJgr9hkMWZi" target="_blank">Telegram</a>
+          <a href="tel:+380631446701">063 144 67 01</a>
+          <div class="intro-copy">
+            <br />© 2026 · Авторська збірка велосипедів
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOWCASE -->
+    <div id="showcase">
+      <!-- TIMER LINE -->
+      <div class="timer-line" id="timerLine"></div>
+
+      <!-- SLIDE 1 -->
+      <div class="slide slide-1 active" data-index="0">
+        <img class="slide-bg" src="images/magellanSid.jpg" alt="Хардтейл MTB Dirt збірки Dimario Bike Master, 2005" />
+        <div class="bike-number">01</div>
+        <div class="slide-content">
+          <div class="bike-tag">ХАРДТЕЙЛ · DIRT · 2005</div>
+          <div class="bike-name">Magellan<br />Polar X</div>
+          <div class="divider"></div>
+          <div class="bike-specs">
+            <div class="spec-item">
+              <div class="spec-label">Вилка</div>
+              <div class="spec-value spec-accent">Rock Shox SID</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Ход</div>
+              <div class="spec-value">100 мм</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Рік рами</div>
+              <div class="spec-value">2006-2007</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Тип</div>
+              <div class="spec-value">Dirt / Street</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2 -->
+      <div class="slide slide-2" data-index="1">
+        <img class="slide-bg" src="images/magellan.jpg" alt="Хардтейл Enduro збірка Dimario Bike Master, 2009" />
+        <div class="bike-number">02</div>
+        <div class="slide-content">
+          <div class="bike-tag">ХАРДТЕЙЛ · ENDURO · 2009</div>
+          <div class="bike-name">
+            Magellan<br />Polar X<br /><span
+              style="font-size: 0.6em; color: yellowgreen"
+              >BOMBER</span
+            >
+          </div>
+          <div class="divider"></div>
+          <div class="bike-specs">
+            <div class="spec-item">
+              <div class="spec-label">Вилка</div>
+              <div class="spec-value spec-accent" style="color: powderblue">
+                Marzocchi Z1 Sport RCV
+              </div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Ход</div>
+              <div class="spec-value">160 мм</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Рік</div>
+              <div class="spec-value">2009</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Тип</div>
+              <div class="spec-value">Enduro, Trail</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3 -->
+      <div class="slide slide-3" data-index="2">
+        <img class="slide-bg" src="images/kona-supreme.jpg" alt="Двопідвіс Free Ride збірка Dimario Bike Master, 2008" />
+        <div class="bike-number">03</div>
+        <div class="slide-content">
+          <div class="bike-tag">ДВОПІДВІС · FREE RIDE · 2008</div>
+          <div class="bike-name">Kona<br />Supreme<br />Four</div>
+          <div class="divider"></div>
+          <div class="bike-specs">
+            <div class="spec-item">
+              <div class="spec-label">Вилка</div>
+              <div class="spec-value spec-accent" style="color: #5dade2">
+                Marzocchi Z1 Sport RCV
+              </div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Ход</div>
+              <div class="spec-value">160 мм</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Рік рами</div>
+              <div class="spec-value">2008</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Тип</div>
+              <div class="spec-value">Free ride</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <div class="slide slide-4" data-index="3">
+        <img class="slide-bg" src="images/hammer S2000.jpg" alt="Hardtail Free Ride збірка Dimario Bike Master, 2021-2022" />
+        <div class="bike-number">04</div>
+        <div class="slide-content">
+          <div class="bike-tag">Hardtail · FREE RIDE · 2021-2022</div>
+          <div class="bike-name">Hammer<br />S<br />2000</div>
+          <div class="divider"></div>
+          <div class="bike-specs">
+            <div class="spec-item">
+              <div class="spec-label">Вилка</div>
+              <div class="spec-value spec-accent" style="color: #5dade2">
+                Marzocchi Z1 Sport RCV 2009 year
+              </div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Ход</div>
+              <div class="spec-value">160 мм</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Рік рами</div>
+              <div class="spec-value">2021-2022</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Тип</div>
+              <div class="spec-value">Enduro/Free ride lite</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- NAV -->
+      <div class="nav-dots">
+        <div class="dot active" onclick="goTo(0)"></div>
+        <div class="dot" onclick="goTo(1)"></div>
+        <div class="dot" onclick="goTo(2)"></div>
+        <div class="dot" onclick="goTo(3)"></div>
+      </div>
+
+      <button class="arrow arrow-left" onclick="prev()">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
+      </button>
+      <button class="arrow arrow-right" onclick="next()">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+      </button>
+
+      <div class="counter">
+        <span class="counter-current" id="counterCurrent">1</span>
+        <span class="counter-sep">/</span>
+        <span class="counter-total">4</span>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="bottom-label">Tap or swipe to navigate</div>
+      <div class="swipe-hint">← свайп →</div>
+    </div>
+
+    <script>
+      // Cursor
+      const cursor = document.getElementById("cursor");
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX - 6 + "px";
+        cursor.style.top = e.clientY - 6 + "px";
+      });
+
+      // Slides
+      const slides = document.querySelectorAll(".slide");
+      
+      document.querySelector(".counter-total").textContent = slides.length;
+      const dots = document.querySelectorAll(".dot");
+      const progressFill = document.getElementById("progressFill");
+      const counterCurrent = document.getElementById("counterCurrent");
+      const timerLine = document.getElementById("timerLine");
+      let current = 0;
+      let autoTimer = null;
+
+      function goTo(index) {
+        slides[current].classList.add("exit");
+        slides[current].classList.remove("active");
+        dots[current].classList.remove("active");
+
+        setTimeout(() => {
+          slides[current].classList.remove("exit");
+          current = index;
+          slides[current].classList.add("active");
+          dots[current].classList.add("active");
+          counterCurrent.textContent = current + 1;
+          progressFill.style.width = ((current + 1) / slides.length) * 100 + "%";
+          startTimer();
+        }, 300);
+      }
+
+      function next() {
+        goTo((current + 1) % slides.length);
+      }
+
+      function prev() {
+        goTo((current + slides.length - 1) % slides.length);
+      }
+
+      function startTimer() {
+        clearTimeout(autoTimer);
+        timerLine.className = "timer-line";
+        void timerLine.offsetWidth;
+        timerLine.className = "timer-line running";
+        autoTimer = setTimeout(() => next(), 6000);
+      }
+
+      // Start auto after intro
+      setTimeout(() => {
+        startTimer();
+      }, 4800);
+
+      // Touch/swipe
+      let touchStartX = 0;
+      document.addEventListener("touchstart", (e) => {
+        touchStartX = e.touches[0].clientX;
+      });
+      document.addEventListener("touchend", (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+      });
+
+      // Keyboard
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+      });
+    </script>
+    <script src="chatbot.js"></script>
+  </body>
+</html>

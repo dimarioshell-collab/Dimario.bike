@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0e1116">
+<meta name="color-scheme" content="dark">
+<title>Конструктор велосипеда на замовлення — Dimario Bike Master</title>
+<meta name="description" content="Онлайн-конструктор велосипеда під замовлення: оберіть раму, колеса, трансмісію, гальма й колір, миттєво побачте кошторис і надішліть заявку майстру Dimario Bike Master.">
+<meta name="keywords" content="конструктор велосипеда, збірка велосипеда під замовлення, кастомний велосипед, підбір компонентів велосипеда, Dimario Bike Master">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Dimario Bike Master">
+<link rel="canonical" href="https://dimario.online/constructor.html">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:title" content="Конструктор велосипеда на замовлення — Dimario Bike Master">
+<meta property="og:description" content="Зберіть велосипед вузол за вузлом і надішліть заявку майстру: рама, колеса, трансмісія, гальма, кермо, сідло, колір.">
+<meta property="og:image" content="https://dimario.online/images/Me%20Kona.jpg">
+<meta property="og:url" content="https://dimario.online/constructor.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:site_name" content="Dimario Bike Master">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Конструктор велосипеда на замовлення — Dimario Bike Master">
+<meta name="twitter:description" content="Зберіть велосипед вузол за вузлом і надішліть заявку майстру.">
+<meta name="twitter:image" content="https://dimario.online/images/Me%20Kona.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="chatbot.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Mono&display=swap');
+
+  :root{
+    --bg: #0e1116;
+    --bg-raised: rgba(27, 32, 39, 0.92);
+    --bg-card: rgba(22, 27, 34, 0.88);
+    --line: rgba(232, 163, 23, 0.18);
+    --line-soft: rgba(255, 255, 255, 0.06);
+    --text: #f4f1ea;
+    --text-dim: #a8b0bd;
+    --text-faint: #6b7380;
+    --accent: #e8a317;
+    --accent-dim: #b87d0f;
+    --accent-ink: #f5d06a;
+    --accent-wash: rgba(232, 163, 23, 0.14);
+    --accent-glow: rgba(232, 163, 23, 0.35);
+    --warn: #e8b84b;
+    --danger: #e2604f;
+    --success: #3ddc97;
+    --f-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+    --f-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'Space Mono', 'Courier New', monospace;
+    --radius: 10px;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{
+    scroll-behavior: smooth;
+  }
+
+  html, body{
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    color: var(--text);
+    font-family: var(--f-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ===== FIXED BACKGROUND (не прокручується) ===== */
+  body{
+    background-color: var(--bg);
+    /* фон тільки через fixed-шар, щоб контент скролився поверх */
+  }
+
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: image-set(
+      url("images/backgrounds/peter-robbins-4LIqxcyPqvc-unsplash.webp") type("image/webp"),
+      url("images/backgrounds/peter-robbins-4LIqxcyPqvc-unsplash.jpg") type("image/jpeg")
+    );
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* додаткова страховка */
+  }
+
+  /* темний оверлей для читабельності поверх яскравого фото */
+  body::after{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(10,12,16,0.72) 0%, rgba(10,12,16,0.55) 40%, rgba(10,12,16,0.78) 100%),
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(232,163,23,0.08), transparent 60%);
+    pointer-events: none;
+  }
+
+  a{ color: var(--accent); text-decoration: none; transition: color .2s ease; }
+  a:hover{ color: var(--accent-ink); }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 20px 32px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+  }
+  .topbar-logo{
+    font-family: var(--f-display);
+    text-transform: uppercase;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+  .topbar-logo:hover{ color: var(--accent); }
+  .topbar-back{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    transition: all .2s ease;
+  }
+  .topbar-back:hover{
+    color: var(--accent-ink);
+    border-color: var(--accent);
+    background: var(--accent-wash);
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 40px 32px 36px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-kicker{
+    font-size: 12px;
+    font-family: var(--mono);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    margin: 0 0 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-kicker::before{
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+  }
+
+  .hero h1{
+    font-family: var(--f-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(38px, 5.5vw, 58px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    max-width: 740px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+
+  .hero h1 span{
+    color: var(--accent);
+    text-shadow: 0 0 40px var(--accent-glow);
+  }
+
+  .hero p{
+    color: var(--text-dim);
+    font-size: 16.5px;
+    line-height: 1.65;
+    max-width: 560px;
+    margin: 0;
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 32px 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 28px;
+    align-items: start;
+    position: relative;
+    z-index: 2;
+  }
+
+  .form-col{ min-width: 0; }
+
+  /* ---------- Node cards (сучасний glass-стиль) ---------- */
+  .node{
+    position: relative;
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0 0 8px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow);
+    transition: border-color .25s ease, box-shadow .25s ease;
+    overflow: hidden;
+  }
+  .node:hover{
+    border-color: rgba(232, 163, 23, 0.32);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(232,163,23,0.08);
+  }
+  .node:focus-within{
+    border-color: var(--accent);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px var(--accent-glow);
+  }
+
+  /* золота смужка зліва */
+  .node::before{
+    content: "";
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-dim));
+    opacity: 0.7;
+    transition: opacity .2s ease;
+  }
+  .node:focus-within::before,
+  .node:hover::before{ opacity: 1; }
+
+  .node-head{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 26px 18px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--line-soft);
+    background: linear-gradient(90deg, rgba(232,163,23,0.06) 0%, transparent 60%);
+  }
+
+  .node-num{
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 14px;
+    color: #14171c;
+    background: linear-gradient(135deg, var(--accent-ink), var(--accent));
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px var(--accent-glow);
+  }
+
+  .node-head h2{
+    font-family: var(--f-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 26px;
+    letter-spacing: 0.03em;
+    margin: 0;
+    color: var(--text);
+    line-height: 1.1;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+  }
+
+  .field{
+    margin: 0 26px 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .field:last-child{
+    border-bottom: none;
+    margin-bottom: 12px;
+  }
+
+  .field-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .field label.title{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .field .value-tag{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent-ink);
+    font-weight: 700;
+    white-space: nowrap;
+    background: var(--accent-wash);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .field .hint{
+    font-size: 12.5px;
+    color: var(--text-faint);
+    margin-top: 7px;
+    line-height: 1.45;
+  }
+
+  select,
+  input[type="text"],
+  input[type="number"],
+  textarea{
+    width: 100%;
+    background: rgba(14, 17, 22, 0.7);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+    font-family: var(--f-body);
+    font-size: 14.5px;
+    padding: 12px 14px;
+    border-radius: 7px;
+    outline: none;
+    transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+  }
+  select:disabled,
+  input:disabled{
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  select:focus,
+  input:focus,
+  textarea:focus{
+    border-color: var(--accent);
+    background: rgba(14, 17, 22, 0.9);
+    box-shadow: 0 0 0 3px var(--accent-wash);
+  }
+  select{
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e8a317' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+    cursor: pointer;
+  }
+  textarea{
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  input[type="range"]{
+    width: 100%;
+    accent-color: var(--accent);
+    height: 5px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .range-bounds{
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 6px;
+  }
+
+  /* chips */
+  .chip-group{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .chip{
+    font-family: var(--f-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-dim);
+    background: rgba(14, 17, 22, 0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .18s ease;
+  }
+  .chip:hover{
+    border-color: var(--accent-dim);
+    color: var(--text);
+    background: rgba(232,163,23,0.08);
+  }
+  .chip.active{
+    background: var(--accent-wash);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+
+  /* swatches */
+  .swatch-group{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .swatch{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+    position: relative;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .swatch:hover{ transform: scale(1.08); }
+  .swatch.active{
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-wash), inset 0 0 0 1px rgba(255,255,255,0.15);
+  }
+  .swatch.active::after{
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  /* compatibility hint */
+  .compat{
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    line-height: 1.45;
+    border: 1px solid transparent;
+  }
+  .compat.ok{
+    background: rgba(61, 220, 151, 0.1);
+    border-color: rgba(61, 220, 151, 0.28);
+    color: var(--success);
+  }
+  .compat.warn{
+    background: rgba(232, 184, 75, 0.1);
+    border-color: rgba(232, 184, 75, 0.3);
+    color: var(--warn);
+  }
+
+  .field-hidden{ display: none !important; }
+
+  /* ---------- Frame size calculator ---------- */
+  .frame-calc{
+    background: linear-gradient(135deg, rgba(232,163,23,0.07) 0%, rgba(14,17,22,0.4) 100%);
+    border: 1px solid rgba(232,163,23,0.22);
+    border-radius: 8px;
+    padding: 16px 18px 14px !important;
+    margin-left: 26px !important;
+    margin-right: 26px !important;
+  }
+  .frame-calc .field-row{
+    margin-bottom: 12px;
+  }
+  .calc-toggle{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .calc-toggle:hover{
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+  .calc-body{
+    transition: opacity .2s ease;
+  }
+  .calc-body.collapsed{
+    display: none;
+  }
+  .calc-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .calc-input-group label{
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+  .calc-input-group label .opt{
+    font-weight: 400;
+    color: var(--text-faint);
+    font-size: 11px;
+  }
+  .calc-input-group input{
+    width: 100%;
+    background: rgba(14, 17, 22, 0.75);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 15px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .calc-input-group input:focus{
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-wash);
+  }
+  .calc-hint{
+    margin: 0 0 12px !important;
+  }
+  .calc-result{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+    padding: 12px 14px;
+    background: rgba(14, 17, 22, 0.65);
+    border: 1px solid rgba(232,163,23,0.25);
+    border-radius: 7px;
+  }
+  .calc-result-main{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .calc-label{
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .calc-size{
+    font-family: var(--f-display);
+    font-size: 32px;
+    color: var(--accent-ink);
+    line-height: 1;
+    text-shadow: 0 0 20px var(--accent-glow);
+  }
+  .calc-result-meta{
+    flex: 1;
+    min-width: 140px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+  .calc-apply{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #14171c;
+    background: linear-gradient(135deg, var(--accent-ink), var(--accent));
+    border: none;
+    border-radius: 6px;
+    padding: 9px 14px;
+    cursor: pointer;
+    transition: transform .15s ease, filter .15s ease;
+    white-space: nowrap;
+  }
+  .calc-apply:hover{
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+  .calc-apply:active{ transform: translateY(0); }
+  .calc-apply.applied{
+    background: rgba(61, 220, 151, 0.2);
+    color: var(--success);
+    border: 1px solid rgba(61, 220, 151, 0.35);
+  }
+
+  @media (max-width: 560px){
+    .calc-grid{ grid-template-columns: 1fr; }
+    .frame-calc{ margin-left: 18px !important; margin-right: 18px !important; }
+  }
+
+  /* ---------- Summary (sticky glass panel) ---------- */
+  .summary-col{ position: relative; }
+  .summary{
+    position: sticky;
+    top: 20px;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow), 0 0 0 1px rgba(232,163,23,0.06);
+  }
+  .summary-head{
+    padding: 22px 22px 16px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(135deg, rgba(232,163,23,0.1) 0%, transparent 70%);
+  }
+  .summary-head .label{
+    font-size: 12px;
+    color: var(--text-dim);
+    margin: 0 0 6px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .summary-price{
+    font-family: var(--mono);
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--accent-ink);
+    text-shadow: 0 0 24px var(--accent-glow);
+  }
+  .summary-price small{
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dim);
+    margin-left: 4px;
+  }
+
+  .budget-status{
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 12px;
+    border-radius: 6px;
+  }
+  .budget-status .dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .budget-status.ok{
+    background: rgba(61, 220, 151, 0.12);
+    color: var(--success);
+  }
+  .budget-status.ok .dot{ background: var(--success); }
+  .budget-status.tight{
+    background: rgba(232, 184, 75, 0.12);
+    color: var(--warn);
+  }
+  .budget-status.tight .dot{ background: var(--warn); }
+  .budget-status.over{
+    background: rgba(226, 96, 79, 0.12);
+    color: var(--danger);
+  }
+  .budget-status.over .dot{ background: var(--danger); }
+
+  .summary-body{
+    max-height: calc(100vh - 360px);
+    min-height: 160px;
+    overflow-y: auto;
+    padding: 8px 22px 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-dim) transparent;
+  }
+  .summary-body::-webkit-scrollbar{ width: 5px; }
+  .summary-body::-webkit-scrollbar-track{ background: transparent; }
+  .summary-body::-webkit-scrollbar-thumb{
+    background: var(--accent-dim);
+    border-radius: 3px;
+  }
+
+  .summary-group{
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .summary-group:last-child{ border-bottom: none; }
+  .summary-group h3{
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .summary-row{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    padding: 3px 0;
+    color: var(--text-dim);
+  }
+  .summary-row span:last-child{
+    color: var(--text);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .summary-foot{
+    padding: 18px 22px 22px;
+    border-top: 1px solid var(--line);
+  }
+  .btn-submit{
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent-ink), var(--accent));
+    color: #14171c;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.03em;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    box-shadow: 0 4px 20px var(--accent-glow);
+  }
+  .btn-submit:hover{
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px var(--accent-glow);
+  }
+  .btn-submit:active{ transform: translateY(0); }
+
+  .submit-note{
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--text-faint);
+    text-align: center;
+    min-height: 16px;
+    line-height: 1.4;
+  }
+  .submit-note.shown{ color: var(--success); }
+  .submit-note.error{ color: var(--danger); }
+
+  .btn-secondary{
+    width: 100%;
+    background: transparent;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    transition: all .2s ease;
+  }
+  .btn-secondary:hover{
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    background: var(--accent-wash);
+  }
+
+  .field-invalid{
+    border-color: var(--danger) !important;
+    box-shadow: 0 0 0 3px rgba(226, 96, 79, 0.15) !important;
+  }
+
+  footer{
+    text-align: center;
+    padding: 28px 20px 40px;
+    color: var(--text-faint);
+    font-size: 12.5px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px){
+    .layout{
+      grid-template-columns: 1fr;
+      padding: 20px 16px 40px;
+    }
+    .summary{ position: static; }
+    .summary-body{ max-height: 320px; }
+    .hero{ padding: 28px 16px 24px; }
+    .topbar{ padding: 16px 16px 0; }
+    .node-head{ padding: 18px 18px 14px; }
+    .field{ margin-left: 18px; margin-right: 18px; }
+    .node-head h2{ font-size: 22px; }
+  }
+</style>
+  <script src="tg-config.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">DIMARIO BIKE</a>
+  <a href="index.html#contact" class="topbar-back">← На головну</a>
+</div>
+
+<header class="hero">
+  <p class="hero-kicker">Майстерня власної збірки</p>
+  <h1>Зберіть <span>велосипед</span>, який під вас, а не під вітрину</h1>
+  <p>Пройдіться по вузлах зліва направо: рама, колеса, трансмісія, гальма, кермо, сідло, колір. Справа в реальному часі формується кошторис — звіряйте його з бюджетом у процесі.</p>
+</header>
+
+<div class="layout">
+  <div class="form-col">
+
+    <!-- 1. РАМА І ПІДВІСКА -->
+    <section class="node" id="node-frame">
+      <div class="node-head"><span class="node-num">1</span><h2>Рама і підвіска</h2></div>
+
+      <div class="field">
+        <div class="field-row"><label class="title">Дисципліна / стиль їзди</label></div>
+        <div class="chip-group" data-chip-group="discipline">
+          <button type="button" class="chip active" data-value="trail">Trail / AM</button>
+          <button type="button" class="chip" data-value="xc">XC</button>
+          <button type="button" class="chip" data-value="enduro">Enduro</button>
+          <button type="button" class="chip" data-value="dh">Downhill</button>
+          <button type="button" class="chip" data-value="freeride">Freeride / Dirt</button>
+          <button type="button" class="chip" data-value="fat">Fatbike</button>
+          <button type="button" class="chip" data-value="gravel">Gravel</button>
+          <button type="button" class="chip" data-value="city">Міський</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title">Рівень комплектації</label></div>
+        <div class="chip-group" data-chip-group="tier">
+          <button type="button" class="chip" data-value="budget">Бюджетний</button>
+          <button type="button" class="chip active" data-value="mid">Середній</button>
+          <button type="button" class="chip" data-value="top">Топ / Race</button>
+        </div>
+        <p class="hint">Бюджетний — надійно без переплат · Середній — баланс · Топ — легкість і топовий обвіс</p>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title">Тип рами</label></div>
+        <div class="chip-group" data-chip-group="frameType">
+          <button type="button" class="chip active" data-value="hardtail">Хардтейл</button>
+          <button type="button" class="chip" data-value="fullsusp">Двопідвіс</button>
+          <button type="button" class="chip" data-value="rigid">Рігід</button>
+          <button type="button" class="chip" data-value="ladies">Дамська / Step-through</button>
+        </div>
+      </div>
+
+      <!-- Калькулятор розміру рами -->
+      <div class="field frame-calc" id="frameCalcBlock">
+        <div class="field-row">
+          <label class="title">Калькулятор розміру рами</label>
+          <button type="button" class="calc-toggle" id="calcToggle" aria-expanded="true">згорнути</button>
+        </div>
+        <div class="calc-body" id="calcBody">
+          <div class="calc-grid">
+            <div class="calc-input-group">
+              <label for="riderHeight">Зріст (см)</label>
+              <input type="number" id="riderHeight" min="140" max="220" step="1" value="175" placeholder="175">
+            </div>
+            <div class="calc-input-group">
+              <label for="riderInseam">Довжина ніг / inseam (см) <span class="opt">необовʼязково</span></label>
+              <input type="number" id="riderInseam" min="60" max="110" step="1" placeholder="напр. 82">
+            </div>
+          </div>
+          <p class="hint calc-hint">Виміряйте inseam від паху до підлоги босоніж. Без inseam рекомендація базується лише на зрості.</p>
+          <div class="calc-result" id="calcResult">
+            <div class="calc-result-main">
+              <span class="calc-label">Рекомендований розмір</span>
+              <span class="calc-size" id="calcSize">M</span>
+            </div>
+            <div class="calc-result-meta" id="calcMeta">Зріст 175 см → M (17–19″)</div>
+            <button type="button" class="calc-apply" id="calcApply">Застосувати розмір</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="frameSize">Розмір рами</label></div>
+        <select id="frameSize">
+          <option value="XS">XS — приблизно 13–15″</option>
+          <option value="S">S — приблизно 15–17″</option>
+          <option value="M" selected>M — приблизно 17–19″</option>
+          <option value="L">L — приблизно 19–21″</option>
+          <option value="XL">XL — приблизно 21–23″</option>
+          <option value="XXL">XXL — приблизно 23–25″</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="rearAxle">Вісь рами (задня)</label></div>
+        <select id="rearAxle">
+          <option value="9qr">9 мм QR</option>
+          <option value="12mm" selected>12 мм thru-axle</option>
+          <option value="15mm">15 мм thru-axle</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="forkType">Тип вилки</label></div>
+        <select id="forkType">
+          <option value="rigid">Ригідна</option>
+          <option value="air-oil" selected>Повітря-олія</option>
+          <option value="spring-oil">Пружина-олія</option>
+          <option value="spring-elast">Пружина-еластомер</option>
+          <option value="dual-crown">Двокоронка (DH/FR)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="forkAxle">Діаметр втулки під дропаути вилки</label></div>
+        <select id="forkAxle">
+          <option value="9">9 мм QR</option>
+          <option value="12" selected>12 мм thru-axle</option>
+          <option value="15">15 мм thru-axle</option>
+          <option value="20">20 мм thru-axle</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="steererType">Тип штока вилки</label></div>
+        <select id="steererType">
+          <option value="taper" selected>Конус</option>
+          <option value="straight">Прямий</option>
+        </select>
+      </div>
+
+      <div class="field" id="forkTravelField">
+        <div class="field-row"><label class="title" for="forkTravel">Хід вилки</label><span class="value-tag" id="forkTravelValue">120 мм</span></div>
+        <input type="range" id="forkTravel" min="80" max="200" step="10" value="120">
+        <div class="range-bounds"><span id="forkTravelMin">80 мм</span><span id="forkTravelMax">200 мм</span></div>
+        <p class="hint" id="forkTravelHint"></p>
+      </div>
+
+      <div class="field" id="shockTypeField">
+        <div class="field-row"><label class="title" for="shockType">Тип амортизатора</label></div>
+        <select id="shockType">
+          <option value="none">Немає</option>
+          <option value="air" selected>Повітряний</option>
+          <option value="spring">Пружинний</option>
+          <option value="air-oil">Повітря-олія</option>
+          <option value="spring-oil">Пружина-олія</option>
+        </select>
+        <p class="hint">Доступно лише для рами-двопідвісу.</p>
+      </div>
+
+      <div class="field" id="shockTravelField">
+        <div class="field-row"><label class="title" for="shockTravel">Хід амортизатора</label><span class="value-tag" id="shockTravelValue">130 мм</span></div>
+        <input type="range" id="shockTravel" min="100" max="200" step="5" value="130">
+        <div class="range-bounds"><span>100 мм</span><span>200 мм</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="seatpostDiameter">Діаметр підсідельної труби</label></div>
+        <select id="seatpostDiameter">
+          <option value="27.2">27.2 мм</option>
+          <option value="30.9">30.9 мм</option>
+          <option value="31.6" selected>31.6 мм</option>
+          <option value="34.9">34.9 мм</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="clampType">Тип підсідельного хомута</label></div>
+        <select id="clampType">
+          <option value="qr">Ексцентрик (QR)</option>
+          <option value="hex" selected>Під шестигранник</option>
+          <option value="integrated">Інтегрований</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="clampDiameter">Діаметр хомута</label></div>
+        <select id="clampDiameter">
+          <option value="31.8" selected>31.8 мм</option>
+          <option value="34.9">34.9 мм</option>
+          <option value="36.4">36.4 мм</option>
+          <option value="39">39 мм</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- 2. КОЛЕСА -->
+    <section class="node" id="node-wheels">
+      <div class="node-head"><span class="node-num">2</span><h2>Колеса, обода, втулки, покришки</h2></div>
+
+      <div class="field">
+        <div class="field-row"><label class="title">Діаметр обода / коліс</label></div>
+        <div class="chip-group" data-chip-group="wheelDiameter">
+          <button type="button" class="chip" data-value="26">26″</button>
+          <button type="button" class="chip" data-value="27.5">27.5″</button>
+          <button type="button" class="chip active" data-value="29">29″</button>
+        </div>
+        <p class="hint">Синхронізовано з діаметром покришок нижче.</p>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="rimType">Тип обода</label></div>
+        <select id="rimType">
+          <option value="pinned">Пістонований</option>
+          <option value="welded">Зварний</option>
+          <option value="tubeless" selected>Tubeless-ready</option>
+          <option value="double">Подвійний обід</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="hubBearing">Тип втулки (підшипники)</label></div>
+        <select id="hubBearing">
+          <option value="loose">На розсипних</option>
+          <option value="sealed" selected>Промислові (пром)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="frontHoles">Втулка передня — отворів</label></div>
+        <select id="frontHoles">
+          <option value="28">28</option>
+          <option value="32" selected>32</option>
+          <option value="36">36</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="rearHoles">Втулка задня — отворів</label></div>
+        <select id="rearHoles">
+          <option value="28">28</option>
+          <option value="32" selected>32</option>
+          <option value="36">36</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="rotorMountHub">Кріплення ротора на втулці</label></div>
+        <select id="rotorMountHub">
+          <option value="6bolt" selected>6-bolt</option>
+          <option value="centerlock">Centerlock</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title">Діаметр покришок</label></div>
+        <div class="chip-group" data-chip-group="tireDiameter">
+          <button type="button" class="chip" data-value="26">26″</button>
+          <button type="button" class="chip" data-value="27.5">27.5″</button>
+          <button type="button" class="chip active" data-value="29">29″</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="tireWidth">Ширина покришок</label></div>
+        <select id="tireWidth">
+          <option value="1.95">1.95″</option>
+          <option value="2.1">2.1″</option>
+          <option value="2.25" selected>2.25″</option>
+          <option value="2.35">2.35″</option>
+          <option value="2.4">2.4″</option>
+          <option value="2.6">2.6″</option>
+          <option value="2.8">2.8″</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="tireTread">Тип покришок (протектор)</label></div>
+        <select id="tireTread">
+          <option value="slick">Сліки</option>
+          <option value="semislick">Напівсліки</option>
+          <option value="trailxc" selected>Трейл-XC</option>
+          <option value="aggressive">Агресивний</option>
+          <option value="mud">Грязьовий</option>
+          <option value="dh">DH</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- 3. ТРАНСМІСІЯ -->
+    <section class="node" id="node-drivetrain">
+      <div class="node-head"><span class="node-num">3</span><h2>Трансмісія</h2></div>
+
+      <div class="field">
+        <div class="field-row"><label class="title">Тип шатунів</label></div>
+        <div class="chip-group" data-chip-group="crankType">
+          <button type="button" class="chip active" data-value="1x">1×</button>
+          <button type="button" class="chip" data-value="2x">2×</button>
+          <button type="button" class="chip" data-value="3x">3×</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="bbType">Тип каретки</label></div>
+        <select id="bbType">
+          <option value="BSA" selected>BSA</option>
+          <option value="PressFit">PressFit</option>
+          <option value="BB30">BB30</option>
+          <option value="PF30">PF30</option>
+          <option value="T47">T47</option>
+        </select>
+        <div class="compat ok" id="bbCompat"></div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="chainring">Кількість зубів зірки</label><span class="value-tag" id="chainringValue">32T</span></div>
+        <input type="range" id="chainring" min="28" max="52" step="1" value="32">
+        <div class="range-bounds"><span>28T</span><span>52T</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="cassetteType">Касета / тріщотка</label></div>
+        <select id="cassetteType">
+          <option value="cassette" selected>Касета</option>
+          <option value="freewheel">Тріщотка</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="cassetteSpeeds">Кількість швидкостей касети</label><span class="value-tag" id="cassetteSpeedsValue">12</span></div>
+        <input type="range" id="cassetteSpeeds" min="7" max="12" step="1" value="12">
+        <div class="range-bounds"><span>7</span><span>12</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="rearDerailleur">Тип заднього перемикача</label></div>
+        <select id="rearDerailleur">
+          <optgroup label="Shimano">
+            <option value="Shimano Deore">Deore</option>
+            <option value="Shimano SLX" selected>SLX</option>
+            <option value="Shimano XT">XT</option>
+          </optgroup>
+          <optgroup label="SRAM">
+            <option value="SRAM NX">NX</option>
+            <option value="SRAM GX">GX</option>
+            <option value="SRAM X01">X01</option>
+          </optgroup>
+          <optgroup label="Інше">
+            <option value="MicroSHIFT">MicroSHIFT</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="derailleurSpeeds">Швидкостей перемикача</label><span class="value-tag" id="derailleurSpeedsValue">12</span></div>
+        <input type="range" id="derailleurSpeeds" min="7" max="12" step="1" value="12">
+        <div class="range-bounds"><span>7</span><span>12</span></div>
+      </div>
+
+      <div class="field" id="frontDerailleurField">
+        <div class="field-row"><label class="title" for="frontDerailleur">Передній перемикач</label></div>
+        <select id="frontDerailleur" disabled>
+          <option value="Немає" selected>Немає</option>
+          <optgroup label="Shimano — шосе">
+            <option value="Shimano Tiagra">Tiagra</option>
+            <option value="Shimano 105">105</option>
+            <option value="Shimano Ultegra">Ultegra</option>
+            <option value="Shimano Dura-Ace">Dura-Ace</option>
+          </optgroup>
+          <optgroup label="SRAM — шосе">
+            <option value="SRAM Rival">Rival</option>
+            <option value="SRAM Force">Force</option>
+          </optgroup>
+          <optgroup label="Туризм">
+            <option value="Shimano Deore (туризм)">Shimano Deore</option>
+            <option value="Shimano Alivio">Shimano Alivio</option>
+            <option value="MicroSHIFT (туризм)">MicroSHIFT</option>
+          </optgroup>
+        </select>
+        <p class="hint" id="frontDerailleurHint">При однорядних шатунах (1×) передній перемикач не потрібен.</p>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="pedals">Педалі</label></div>
+        <select id="pedals">
+          <option value="platform" selected>Платформні</option>
+          <option value="spd">SPD</option>
+          <option value="crankbrothers">Crankbrothers</option>
+          <option value="combo">Комбо</option>
+          <option value="none">Без педалей</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- 4. ГАЛЬМА -->
+    <section class="node" id="node-brakes">
+      <div class="node-head"><span class="node-num">4</span><h2>Гальма і ротори</h2></div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="brakeType">Тип гальм</label></div>
+        <select id="brakeType">
+          <option value="mech">Механічні дискові</option>
+          <option value="hydraulic" selected>Гідравлічні дискові</option>
+          <option value="rim">Обідні</option>
+        </select>
+      </div>
+
+      <div class="field" id="pistonsField">
+        <div class="field-row"><label class="title" for="pistons">Кількість поршнів</label></div>
+        <select id="pistons">
+          <option value="2" selected>2</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+
+      <div class="field" id="rotorTypeField">
+        <div class="field-row"><label class="title" for="rotorType">Тип роторів</label></div>
+        <select id="rotorType">
+          <option value="steel" selected>Сталеві</option>
+          <option value="cooled">З охолодженням</option>
+          <option value="spider">На павуку</option>
+          <option value="centerlock">Centerlock</option>
+          <option value="6bolt">6-bolt (без floating)</option>
+        </select>
+      </div>
+
+      <div class="field" id="rotorDiameterField">
+        <div class="field-row"><label class="title">Діаметр роторів</label></div>
+        <div class="chip-group" data-chip-group="rotorDiameter">
+          <button type="button" class="chip" data-value="160">160 мм</button>
+          <button type="button" class="chip active" data-value="180">180 мм</button>
+          <button type="button" class="chip" data-value="203">203 мм</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. КЕРМОВЕ КЕРУВАННЯ -->
+    <section class="node" id="node-cockpit">
+      <div class="node-head"><span class="node-num">5</span><h2>Кермове керування</h2></div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="barWidth">Ширина керма</label><span class="value-tag" id="barWidthValue">780 мм</span></div>
+        <input type="range" id="barWidth" min="720" max="820" step="10" value="780">
+        <div class="range-bounds"><span>720 мм</span><span>820 мм</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="barDiameter">Діаметр керма</label></div>
+        <select id="barDiameter">
+          <option value="25.4">25.4 мм</option>
+          <option value="31.8" selected>31.8 мм</option>
+          <option value="35">35 мм</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="stemType">Тип виносу</label></div>
+        <select id="stemType">
+          <option value="ahead" selected>Ahead</option>
+          <option value="quill">Штирьовий</option>
+          <option value="direct">Direct mount</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="stemDiameter">Діаметр виносу</label></div>
+        <select id="stemDiameter">
+          <option value="25.4">25.4 мм</option>
+          <option value="31.8" selected>31.8 мм</option>
+          <option value="35">35 мм</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="stemLength">Довжина виносу</label><span class="value-tag" id="stemLengthValue">50 мм</span></div>
+        <input type="range" id="stemLength" min="35" max="80" step="5" value="50">
+        <div class="range-bounds"><span>35 мм</span><span>80 мм</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="gripType">Тип грипсів</label></div>
+        <select id="gripType">
+          <option value="regular">Звичайні</option>
+          <option value="lockon" selected>Lock-on</option>
+          <option value="lockon2">Lock-on, 2 кільця</option>
+          <option value="foam">Поролонові</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="barEnds">Баренди</label></div>
+        <select id="barEnds">
+          <option value="none" selected>Немає</option>
+          <option value="plastic">Пластикові</option>
+          <option value="aluminum">Алюмінієві під шестигранник</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- 6. СІДЛО І ДРОПЕР -->
+    <section class="node" id="node-saddle">
+      <div class="node-head"><span class="node-num">6</span><h2>Сідло і дропер</h2></div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="saddleType">Тип сідла</label></div>
+        <select id="saddleType">
+          <option value="sport" selected>Спортивне</option>
+          <option value="comfort">Комфортне</option>
+          <option value="gel">З гелем</option>
+          <option value="women">Жіноче</option>
+          <option value="carbon">Карбонове</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="dropperType">Тип дропера</label></div>
+        <select id="dropperType">
+          <option value="none" selected>Немає</option>
+          <option value="external">Зовнішній</option>
+          <option value="internal">Внутрішній</option>
+          <option value="wireless">Бездротовий</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- 7. КОЛЬОРИ -->
+    <section class="node" id="node-colors">
+      <div class="node-head"><span class="node-num">7</span><h2>Кольори</h2></div>
+
+      <div class="field">
+        <div class="field-row"><label class="title">Колір рами</label><span class="value-tag" id="frameColorValue">Матовий чорний</span></div>
+        <div class="swatch-group" data-swatch-group="frameColor">
+          <span class="swatch active" data-value="Матовий чорний" style="background:#1c1f22" title="Матовий чорний"></span>
+          <span class="swatch" data-value="Графітовий сірий" style="background:#4a4f55" title="Графітовий сірий"></span>
+          <span class="swatch" data-value="Кислотно-зелений" style="background:#3ddc97" title="Кислотно-зелений"></span>
+          <span class="swatch" data-value="Вогняно-оранжевий" style="background:#e2724f" title="Вогняно-оранжевий"></span>
+          <span class="swatch" data-value="Небесно-синій" style="background:#3f8fe0" title="Небесно-синій"></span>
+          <span class="swatch" data-value="Бордовий" style="background:#7a2b3a" title="Бордовий"></span>
+          <span class="swatch" data-value="Білий" style="background:#e9edec" title="Білий"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title">Колір грипсів</label><span class="value-tag" id="gripColorValue">Чорний</span></div>
+        <div class="swatch-group" data-swatch-group="gripColor">
+          <span class="swatch active" data-value="Чорний" style="background:#1c1f22" title="Чорний"></span>
+          <span class="swatch" data-value="Кислотно-зелений" style="background:#3ddc97" title="Кислотно-зелений"></span>
+          <span class="swatch" data-value="Оранжевий" style="background:#e2724f" title="Оранжевий"></span>
+          <span class="swatch" data-value="Синій" style="background:#3f8fe0" title="Синій"></span>
+          <span class="swatch" data-value="Сірий" style="background:#8a9096" title="Сірий"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. БЮДЖЕТ -->
+    <section class="node" id="node-budget">
+      <div class="node-head"><span class="node-num">8</span><h2>Бюджет і побажання</h2></div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="budgetInput">Бюджет</label></div>
+        <input type="number" id="budgetInput" min="0" step="1000" value="150000" placeholder="Наприклад, 150000">
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="wishes">Побажання</label></div>
+        <textarea id="wishes" placeholder="Особливі побажання до збірки: геометрія, використання, терміни..."></textarea>
+      </div>
+
+      <div class="field">
+        <div class="field-row"><label class="title" for="contact">Ім'я та контакт *</label></div>
+        <input type="text" id="contact" placeholder="Ім'я, телефон або месенджер">
+        <div class="hint">Обов'язково для зв'язку — без цього ми не зможемо відповісти на заявку.</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="summary-col">
+    <div class="summary">
+      <div class="summary-head">
+        <p class="label">Орієнтовна ціна збірки</p>
+        <div class="summary-price"><span id="totalPrice">0</span><small>₴</small></div>
+        <div class="budget-status ok" id="budgetStatus"><span class="dot"></span><span id="budgetStatusText">Вкажіть бюджет</span></div>
+      </div>
+      <div class="summary-body" id="summaryBody"></div>
+      <div class="summary-foot">
+        <button type="button" class="btn-submit" id="submitBtn">Надіслати заявку</button>
+        <button type="button" class="btn-secondary" id="callBtn">📞 Подзвонити майстру</button>
+        <p class="submit-note" id="submitNote"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>Заявка надсилається майстру в Telegram (після налаштування бота). До налаштування — копіюється в буфер і відкриває Telegram.</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- helpers ---------------- */
+  const $ = (id) => document.getElementById(id);
+  const fmt = (n) => Math.round(n).toLocaleString('uk-UA');
+
+  function setChipGroupValue(groupName, value){
+    document.querySelectorAll('[data-chip-group="'+groupName+'"] .chip').forEach(c=>{
+      c.classList.toggle('active', c.dataset.value === String(value));
+    });
+  }
+  function getChipGroupValue(groupName){
+    const active = document.querySelector('[data-chip-group="'+groupName+'"] .chip.active');
+    return active ? active.dataset.value : null;
+  }
+  function bindChipGroup(groupName, onChange){
+    document.querySelectorAll('[data-chip-group="'+groupName+'"] .chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        setChipGroupValue(groupName, chip.dataset.value);
+        if(typeof onChange === 'function') onChange(chip.dataset.value);
+        update();
+      });
+    });
+  }
+  function bindSwatchGroup(groupName, labelElId){
+    document.querySelectorAll('[data-swatch-group="'+groupName+'"] .swatch').forEach(sw=>{
+      sw.addEventListener('click', ()=>{
+        document.querySelectorAll('[data-swatch-group="'+groupName+'"] .swatch').forEach(s=>s.classList.remove('active'));
+        sw.classList.add('active');
+        if(labelElId) $(labelElId).textContent = sw.dataset.value;
+        update();
+      });
+    });
+  }
+  function getSwatchGroupValue(groupName){
+    const active = document.querySelector('[data-swatch-group="'+groupName+'"] .swatch.active');
+    return active ? active.dataset.value : null;
+  }
+
+  /* ---------------- Frame size calculator ---------------- */
+  // Рекомендації для MTB / trail (орієнтовні діапазони в см зросту)
+  // При наявності inseam — додаткова корекція
+  const FRAME_SIZE_TABLE = [
+    { size: 'XS',  minH: 140, maxH: 155, label: 'XS (13–15″)', tip: 'компактна геометрія' },
+    { size: 'S',   minH: 155, maxH: 165, label: 'S (15–17″)',  tip: 'малий розмір' },
+    { size: 'M',   minH: 165, maxH: 178, label: 'M (17–19″)',  tip: 'середній розмір' },
+    { size: 'L',   minH: 178, maxH: 188, label: 'L (19–21″)',  tip: 'великий розмір' },
+    { size: 'XL',  minH: 188, maxH: 198, label: 'XL (21–23″)', tip: 'дуже великий' },
+    { size: 'XXL', minH: 198, maxH: 220, label: 'XXL (23–25″)', tip: 'екстра-великий' }
+  ];
+
+  function calcFrameSize(heightCm, inseamCm){
+    if(!heightCm || heightCm < 140 || heightCm > 220){
+      return { size: null, meta: 'Вкажіть зріст від 140 до 220 см' };
+    }
+
+    // Базовий підбір за зростом
+    let match = FRAME_SIZE_TABLE.find(r => heightCm >= r.minH && heightCm < r.maxH);
+    if(!match) match = FRAME_SIZE_TABLE[FRAME_SIZE_TABLE.length - 1];
+
+    let size = match.size;
+    let note = '';
+
+    // Корекція за inseam (якщо вказано)
+    if(inseamCm && inseamCm >= 60 && inseamCm <= 110){
+      // Орієнтовне співвідношення: inseam ≈ 45–48% від зросту
+      const ratio = inseamCm / heightCm;
+      if(ratio < 0.44){
+        // короткі ноги → можна взяти на розмір менше
+        const idx = FRAME_SIZE_TABLE.findIndex(r => r.size === size);
+        if(idx > 0){
+          size = FRAME_SIZE_TABLE[idx - 1].size;
+          note = ' (скореговано вниз через коротший inseam)';
+        }
+      } else if(ratio > 0.49){
+        // довгі ноги → можна взяти на розмір більше
+        const idx = FRAME_SIZE_TABLE.findIndex(r => r.size === size);
+        if(idx < FRAME_SIZE_TABLE.length - 1){
+          size = FRAME_SIZE_TABLE[idx + 1].size;
+          note = ' (скореговано вгору через довший inseam)';
+        }
+      }
+    }
+
+    const final = FRAME_SIZE_TABLE.find(r => r.size === size) || match;
+    const inseamPart = (inseamCm && inseamCm >= 60) ? ', inseam ' + inseamCm + ' см' : '';
+    const meta = 'Зріст ' + heightCm + ' см' + inseamPart + ' → ' + final.label + note;
+
+    return { size: final.size, label: final.label, meta, tip: final.tip };
+  }
+
+  function updateFrameCalc(){
+    const h = parseInt($('riderHeight').value, 10);
+    const i = parseInt($('riderInseam').value, 10) || 0;
+    const res = calcFrameSize(h, i);
+    const sizeEl = $('calcSize');
+    const metaEl = $('calcMeta');
+    const applyBtn = $('calcApply');
+
+    if(!res.size){
+      sizeEl.textContent = '—';
+      metaEl.textContent = res.meta;
+      applyBtn.disabled = true;
+      applyBtn.classList.remove('applied');
+      applyBtn.textContent = 'Застосувати розмір';
+      return;
+    }
+
+    sizeEl.textContent = res.size;
+    metaEl.textContent = res.meta;
+    applyBtn.disabled = false;
+
+    // підсвічуємо, якщо вже вибрано цей розмір
+    if($('frameSize').value === res.size){
+      applyBtn.classList.add('applied');
+      applyBtn.textContent = '✓ Застосовано';
+    } else {
+      applyBtn.classList.remove('applied');
+      applyBtn.textContent = 'Застосувати розмір';
+    }
+  }
+
+  function applyCalcSize(){
+    const h = parseInt($('riderHeight').value, 10);
+    const i = parseInt($('riderInseam').value, 10) || 0;
+    const res = calcFrameSize(h, i);
+    if(!res.size) return;
+    $('frameSize').value = res.size;
+    updateFrameCalc();
+    update();
+  }
+
+  // toggle collapse
+  const calcToggle = $('calcToggle');
+  const calcBody = $('calcBody');
+  if(calcToggle && calcBody){
+    calcToggle.addEventListener('click', ()=>{
+      const collapsed = calcBody.classList.toggle('collapsed');
+      calcToggle.textContent = collapsed ? 'розгорнути' : 'згорнути';
+      calcToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    });
+  }
+
+  $('riderHeight').addEventListener('input', updateFrameCalc);
+  $('riderInseam').addEventListener('input', updateFrameCalc);
+  $('calcApply').addEventListener('click', applyCalcSize);
+
+  // оновлювати стан кнопки при ручній зміні select
+  $('frameSize').addEventListener('change', updateFrameCalc);
+
+  /* ---------------- chip groups init ---------------- */
+  bindChipGroup('frameType', ()=>{});
+  bindChipGroup('crankType', ()=>{});
+  bindChipGroup('rotorDiameter', ()=>{});
+
+  // wheel diameter <-> tire diameter sync
+  bindChipGroup('wheelDiameter', (val)=>{ setChipGroupValue('tireDiameter', val); });
+  bindChipGroup('tireDiameter', (val)=>{ setChipGroupValue('wheelDiameter', val); });
+
+  bindSwatchGroup('frameColor', 'frameColorValue');
+  bindSwatchGroup('gripColor', 'gripColorValue');
+
+  /* ---------------- plain inputs ---------------- */
+  const plainIds = [
+    'frameSize','rearAxle','forkType','forkAxle','steererType','shockType','seatpostDiameter','clampType','clampDiameter',
+    'rimType','hubBearing','frontHoles','rearHoles','rotorMountHub','tireWidth','tireTread',
+    'bbType','cassetteType','rearDerailleur','frontDerailleur','pedals',
+    'brakeType','pistons','rotorType',
+    'barDiameter','stemType','stemDiameter','gripType','barEnds',
+    'saddleType','dropperType',
+    'budgetInput','wishes','contact'
+  ];
+  plainIds.forEach(id=>{
+    const el = $(id);
+    if(!el) return;
+    el.addEventListener('input', update);
+    el.addEventListener('change', update);
+  });
+
+  const rangeMap = {
+    forkTravel: 'forkTravelValue',
+    shockTravel: 'shockTravelValue',
+    chainring: 'chainringValue',
+    cassetteSpeeds: 'cassetteSpeedsValue',
+    derailleurSpeeds: 'derailleurSpeedsValue',
+    barWidth: 'barWidthValue',
+    stemLength: 'stemLengthValue'
+  };
+  const rangeSuffix = {
+    forkTravel: ' мм', shockTravel: ' мм', chainring: 'T', cassetteSpeeds: '',
+    derailleurSpeeds: '', barWidth: ' мм', stemLength: ' мм'
+  };
+  Object.keys(rangeMap).forEach(id=>{
+    const el = $(id);
+    if(!el) return;
+    el.addEventListener('input', ()=>{
+      $(rangeMap[id]).textContent = el.value + rangeSuffix[id];
+      update();
+    });
+  });
+
+  /* ---------------- BB compatibility ---------------- */
+  const bbCompatMap = {
+    BSA:      {level:'ok',   text:'Універсальна різьбова каретка, підходить більшості шатунів.'},
+    T47:      {level:'ok',   text:'Різьба великого діаметра, гарна сумісність із сучасними шатунами.'},
+    PressFit: {level:'warn', text:'Потрібна рама під запресування (PF86/PF92 тощо) — перевірте стандарт рами.'},
+    BB30:     {level:'warn', text:'Потрібна вісь BB30 Ø30 мм або адаптери під іншу вісь.'},
+    PF30:     {level:'warn', text:'Запресована каретка BB30 — потрібні шатуни BB30/PF30 або адаптери.'}
+  };
+
+  /* ---------------- pricing ---------------- */
+  const BASE_PRICE = 45000;
+
+  const price = {
+    frameType: {hardtail:0, fullsusp:35000, ladies:5000},
+    rearAxle: {'9qr':0, '12mm':1500, '15mm':2500},
+    forkAxle: {'9':0, '12':800, '15':1500, '20':2500},
+    steererType: {taper:800, straight:0},
+    forkType: {rigid:0, 'air-oil':8000, 'spring-oil':5000, 'spring-elast':2000, 'dual-crown':25000},
+    shockType: {none:0, air:9000, spring:6000, 'air-oil':14000, 'spring-oil':11000},
+    clampType: {qr:500, hex:0, integrated:1500},
+    wheelDiameter: {'26':0, '27.5':1000, '29':2000},
+    rimType: {pinned:0, welded:1500, tubeless:4000, double:3000},
+    hubBearing: {loose:0, sealed:3500},
+    rotorMountHub: {'6bolt':0, centerlock:800},
+    tireTread: {slick:0, semislick:500, trailxc:1000, aggressive:1500, mud:1800, dh:2500},
+    crankType: {'1x':0, '2x':2500, '3x':4000},
+    bbType: {BSA:0, PressFit:1500, BB30:1200, PF30:1800, T47:2000},
+    rearDerailleur: {'Shimano Deore':0, 'Shimano SLX':2000, 'Shimano XT':4500, 'SRAM NX':1500, 'SRAM GX':3500, 'SRAM X01':9000, 'MicroSHIFT':500},
+    frontDerailleurTier: function(v){
+      if(v === 'Немає') return 0;
+      if(/Dura-Ace|Force/.test(v)) return 6000;
+      if(/Ultegra|Rival/.test(v)) return 4200;
+      if(/105/.test(v)) return 3000;
+      if(/Tiagra/.test(v)) return 1800;
+      return 800;
+    },
+    pedals: {platform:0, spd:2500, crankbrothers:3200, combo:2800, none:-500},
+    brakeType: {mech:0, hydraulic:4000, rim:-2000},
+    pistons: {'2':0, '4':2500},
+    rotorType: {steel:0, cooled:1200, spider:1800, centerlock:900, '6bolt':0},
+    rotorDiameter: {'160':0, '180':500, '203':1000},
+    barDiameter: {'25.4':0, '31.8':300, '35':700},
+    stemType: {ahead:0, quill:0, direct:1500},
+    gripType: {regular:0, lockon:600, lockon2:900, foam:-200},
+    barEnds: {none:0, plastic:400, aluminum:900},
+    saddleType: {sport:0, comfort:500, gel:800, women:600, carbon:3500},
+    dropperType: {none:0, external:6000, internal:9000, wireless:18000}
+  };
+
+  function readState(){
+    const frameType = getChipGroupValue('frameType') || 'hardtail';
+    const forkType = $('forkType').value;
+    const isFullSusp = frameType === 'fullsusp';
+    const isRigid = forkType === 'rigid';
+    const isDualCrown = forkType === 'dual-crown';
+    const crankType = getChipGroupValue('crankType') || '1x';
+    const brakeType = $('brakeType').value;
+
+    return {
+      frame: {
+        frameType, isFullSusp,
+        frameSize: $('frameSize').value,
+        rearAxle: $('rearAxle').value,
+        forkType, isRigid, isDualCrown,
+        forkAxle: $('forkAxle').value,
+        steererType: $('steererType').value,
+        forkTravel: parseInt($('forkTravel').value, 10) || 120,
+        shockType: $('shockType').value,
+        shockTravel: parseInt($('shockTravel').value, 10) || 130,
+        seatpostDiameter: $('seatpostDiameter').value,
+        clampType: $('clampType').value,
+        clampDiameter: $('clampDiameter').value
+      },
+      wheels: {
+        wheelDiameter: getChipGroupValue('wheelDiameter') || '29',
+        rimType: $('rimType').value,
+        hubBearing: $('hubBearing').value,
+        frontHoles: $('frontHoles').value,
+        rearHoles: $('rearHoles').value,
+        rotorMountHub: $('rotorMountHub').value,
+        tireDiameter: getChipGroupValue('tireDiameter') || '29',
+        tireWidth: $('tireWidth').value,
+        tireTread: $('tireTread').value
+      },
+      drivetrain: {
+        crankType,
+        bbType: $('bbType').value,
+        chainring: parseInt($('chainring').value, 10) || 32,
+        cassetteType: $('cassetteType').value,
+        cassetteSpeeds: parseInt($('cassetteSpeeds').value, 10) || 12,
+        rearDerailleur: $('rearDerailleur').value,
+        derailleurSpeeds: parseInt($('derailleurSpeeds').value, 10) || 12,
+        frontDerailleur: crankType === '1x' ? 'Немає' : $('frontDerailleur').value,
+        pedals: $('pedals').value
+      },
+      brakes: {
+        brakeType, isRim: brakeType === 'rim',
+        pistons: $('pistons').value,
+        rotorType: $('rotorType').value,
+        rotorDiameter: getChipGroupValue('rotorDiameter') || '180'
+      },
+      cockpit: {
+        barWidth: parseInt($('barWidth').value, 10) || 780,
+        barDiameter: $('barDiameter').value,
+        stemType: $('stemType').value,
+        stemDiameter: $('stemDiameter').value,
+        stemLength: parseInt($('stemLength').value, 10) || 50,
+        gripType: $('gripType').value,
+        barEnds: $('barEnds').value
+      },
+      saddle: {
+        saddleType: $('saddleType').value,
+        dropperType: $('dropperType').value
+      },
+      colors: {
+        frameColor: getSwatchGroupValue('frameColor') || 'Матовий чорний',
+        gripColor: getSwatchGroupValue('gripColor') || 'Чорний'
+      },
+      budget: {
+        amount: parseFloat($('budgetInput').value) || 0,
+        wishes: ($('wishes').value || '').trim(),
+        contact: ($('contact').value || '').trim()
+      }
+    };
+  }
+
+  const LABELS = {
+    frameType: {hardtail:'Хардтейл', fullsusp:'Двопідвіс', ladies:'Дамська'},
+    rearAxle: {'9qr':'9 мм QR', '12mm':'12 мм thru-axle', '15mm':'15 мм thru-axle'},
+    forkType: {rigid:'Ригідна', 'air-oil':'Повітря-олія', 'spring-oil':'Пружина-олія', 'spring-elast':'Пружина-еластомер', 'dual-crown':'Двокоронка (DH/FR)'},
+    forkAxle: {'9':'9 мм QR', '12':'12 мм thru-axle', '15':'15 мм thru-axle', '20':'20 мм thru-axle'},
+    steererType: {taper:'Конус', straight:'Прямий'},
+    shockType: {none:'Немає', air:'Повітряний', spring:'Пружинний', 'air-oil':'Повітря-олія', 'spring-oil':'Пружина-олія'},
+    clampType: {qr:'Ексцентрик (QR)', hex:'Під шестигранник', integrated:'Інтегрований'},
+    rimType: {pinned:'Пістонований', welded:'Зварний', tubeless:'Tubeless-ready', double:'Подвійний обід'},
+    hubBearing: {loose:'На розсипних', sealed:'Промислові (пром)'},
+    rotorMountHub: {'6bolt':'6-bolt', centerlock:'Centerlock'},
+    tireTread: {slick:'Сліки', semislick:'Напівсліки', trailxc:'Трейл-XC', aggressive:'Агресивний', mud:'Грязьовий', dh:'DH'},
+    crankType: {'1x':'1×', '2x':'2×', '3x':'3×'},
+    cassetteType: {cassette:'Касета', freewheel:'Тріщотка'},
+    pedals: {platform:'Платформні', spd:'SPD', crankbrothers:'Crankbrothers', combo:'Комбо', none:'Без педалей'},
+    brakeType: {mech:'Механічні дискові', hydraulic:'Гідравлічні дискові', rim:'Обідні'},
+    rotorType: {steel:'Сталеві', cooled:'З охолодженням', spider:'На павуку', centerlock:'Centerlock', '6bolt':'6-bolt'},
+    stemType: {ahead:'Ahead', quill:'Штирьовий', direct:'Direct mount'},
+    gripType: {regular:'Звичайні', lockon:'Lock-on', lockon2:'Lock-on, 2 кільця', foam:'Поролонові'},
+    barEnds: {none:'Немає', plastic:'Пластикові', aluminum:'Алюмінієві під шестигранник'},
+    saddleType: {sport:'Спортивне', comfort:'Комфортне', gel:'З гелем', women:'Жіноче', carbon:'Карбонове'},
+    dropperType: {none:'Немає', external:'Зовнішній', internal:'Внутрішній', wireless:'Бездротовий'}
+  };
+
+  function computePrice(s){
+    let total = BASE_PRICE;
+    total += price.frameType[s.frame.frameType] || 0;
+    total += price.rearAxle[s.frame.rearAxle] || 0;
+    total += price.forkType[s.frame.forkType] || 0;
+    total += price.forkAxle[s.frame.forkAxle] || 0;
+    total += price.steererType[s.frame.steererType] || 0;
+    if(!s.frame.isRigid) total += Math.max(0, s.frame.forkTravel - 100) * 40;
+    if(s.frame.isFullSusp){
+      total += price.shockType[s.frame.shockType] || 0;
+      total += Math.max(0, s.frame.shockTravel - 100) * 30;
+    }
+    total += price.clampType[s.frame.clampType] || 0;
+
+    total += price.wheelDiameter[s.wheels.wheelDiameter] || 0;
+    total += price.rimType[s.wheels.rimType] || 0;
+    total += price.hubBearing[s.wheels.hubBearing] || 0;
+    total += price.rotorMountHub[s.wheels.rotorMountHub] || 0;
+    total += Math.max(0, (parseFloat(s.wheels.tireWidth) - 1.95)) * 1100;
+    total += price.tireTread[s.wheels.tireTread] || 0;
+
+    total += price.crankType[s.drivetrain.crankType] || 0;
+    total += price.bbType[s.drivetrain.bbType] || 0;
+    total += Math.max(0, s.drivetrain.cassetteSpeeds - 7) * 800;
+    total += price.rearDerailleur[s.drivetrain.rearDerailleur] || 0;
+    total += price.frontDerailleurTier(s.drivetrain.frontDerailleur);
+    total += price.pedals[s.drivetrain.pedals] || 0;
+
+    total += price.brakeType[s.brakes.brakeType] || 0;
+    if(!s.brakes.isRim){
+      total += price.pistons[s.brakes.pistons] || 0;
+      total += price.rotorType[s.brakes.rotorType] || 0;
+      total += price.rotorDiameter[s.brakes.rotorDiameter] || 0;
+    }
+
+    total += price.barDiameter[s.cockpit.barDiameter] || 0;
+    total += price.stemType[s.cockpit.stemType] || 0;
+    total += price.gripType[s.cockpit.gripType] || 0;
+    total += price.barEnds[s.cockpit.barEnds] || 0;
+
+    total += price.saddleType[s.saddle.saddleType] || 0;
+    total += price.dropperType[s.saddle.dropperType] || 0;
+
+    return Math.round(total);
+  }
+
+  /* ---------------- constraint logic ---------------- */
+  function applyConstraints(){
+    const frameType = getChipGroupValue('frameType') || 'hardtail';
+    const forkType = $('forkType').value;
+    const crankType = getChipGroupValue('crankType') || '1x';
+    const brakeType = $('brakeType').value;
+    const isFullSusp = frameType === 'fullsusp';
+    const isRigid = forkType === 'rigid';
+    const isDualCrown = forkType === 'dual-crown';
+    const isHardtailOrLadies = frameType === 'hardtail' || frameType === 'ladies';
+
+    // --- shock fields only for full suspension ---
+    $('shockTypeField').classList.toggle('field-hidden', !isFullSusp);
+    $('shockTravelField').classList.toggle('field-hidden', !isFullSusp);
+    if(!isFullSusp){
+      $('shockType').value = 'none';
+    } else if($('shockType').value === 'none'){
+      $('shockType').value = 'air';
+    }
+
+    // --- fork travel: hide when rigid, clamp range otherwise ---
+    $('forkTravelField').classList.toggle('field-hidden', isRigid);
+    if(!isRigid){
+      let min = 80, max = 200;
+      if(isHardtailOrLadies) max = Math.min(max, 160);
+      if(isDualCrown) min = Math.max(min, 180);
+      if(min > max) min = max;
+      const forkTravelEl = $('forkTravel');
+      forkTravelEl.min = min;
+      forkTravelEl.max = max;
+      let val = parseInt(forkTravelEl.value, 10);
+      if(val < min) val = min;
+      if(val > max) val = max;
+      forkTravelEl.value = val;
+      $('forkTravelValue').textContent = val + ' мм';
+      $('forkTravelMin').textContent = min + ' мм';
+      $('forkTravelMax').textContent = max + ' мм';
+      let hint = '';
+      if(isHardtailOrLadies) hint = 'На хардтейлі та дамській рамі хід вилки обмежений 160 мм.';
+      if(isDualCrown) hint = 'Двокоронка вимагає ходу вилки не менше 180 мм.';
+      $('forkTravelHint').textContent = hint;
+    }
+
+    // --- crank type -> front derailleur ---
+    const fdField = $('frontDerailleurField');
+    const fdSelect = $('frontDerailleur');
+    if(crankType === '1x'){
+      fdSelect.disabled = true;
+      fdSelect.value = 'Немає';
+      $('frontDerailleurHint').textContent = 'При однорядних шатунах (1×) передній перемикач не потрібен.';
+    } else {
+      fdSelect.disabled = false;
+      if(fdSelect.value === 'Немає') fdSelect.value = 'Shimano Deore (туризм)';
+      $('frontDerailleurHint').textContent = 'Вибір залежить від типу рами: шосейні групи для дропбар-збірок, Deore/Alivio/MicroSHIFT — для туризму.';
+    }
+    fdField.style.opacity = crankType === '1x' ? '0.6' : '1';
+
+    // --- BB compatibility hint ---
+    const bbVal = $('bbType').value;
+    const compatEl = $('bbCompat');
+    const compat = bbCompatMap[bbVal] || {level:'ok', text:''};
+    compatEl.textContent = compat.text;
+    compatEl.className = 'compat ' + compat.level;
+
+    // --- rim brakes disable rotor-related fields ---
+    const isRim = brakeType === 'rim';
+    ['pistonsField','rotorTypeField','rotorDiameterField'].forEach(id=>{
+      $(id).classList.toggle('field-hidden', isRim);
+    });
+    if(isRim){
+      $('pistons').disabled = true;
+      $('rotorType').disabled = true;
+    } else {
+      $('pistons').disabled = false;
+      $('rotorType').disabled = false;
+    }
+  }
+
+  /* ---------------- summary rendering ---------------- */
+  function buildSummaryGroups(s){
+    return [
+      {
+        title: 'Рама і підвіска',
+        rows: [
+          ['Тип рами', LABELS.frameType[s.frame.frameType]],
+          ['Розмір рами', s.frame.frameSize],
+          ['Вісь (задня)', LABELS.rearAxle[s.frame.rearAxle]],
+          ['Вилка', LABELS.forkType[s.frame.forkType]],
+          ['Вісь вилки (дропаути)', LABELS.forkAxle[s.frame.forkAxle]],
+          ['Шток вилки', LABELS.steererType[s.frame.steererType]],
+          ...(s.frame.isRigid ? [] : [['Хід вилки', s.frame.forkTravel + ' мм']]),
+          ...(s.frame.isFullSusp ? [
+            ['Амортизатор', LABELS.shockType[s.frame.shockType]],
+            ['Хід амортизатора', s.frame.shockTravel + ' мм']
+          ] : []),
+          ['Підсідельна труба', s.frame.seatpostDiameter + ' мм'],
+          ['Хомут', LABELS.clampType[s.frame.clampType] + ', ' + s.frame.clampDiameter + ' мм']
+        ]
+      },
+      {
+        title: 'Колеса',
+        rows: [
+          ['Діаметр коліс', s.wheels.wheelDiameter + '″'],
+          ['Обід', LABELS.rimType[s.wheels.rimType]],
+          ['Втулки', LABELS.hubBearing[s.wheels.hubBearing]],
+          ['Отвори (пер./задн.)', s.wheels.frontHoles + ' / ' + s.wheels.rearHoles],
+          ['Кріплення ротора', LABELS.rotorMountHub[s.wheels.rotorMountHub]],
+          ['Покришки', s.wheels.tireDiameter + '″ × ' + s.wheels.tireWidth + '″'],
+          ['Протектор', LABELS.tireTread[s.wheels.tireTread]]
+        ]
+      },
+      {
+        title: 'Трансмісія',
+        rows: [
+          ['Шатуни', LABELS.crankType[s.drivetrain.crankType]],
+          ['Каретка', s.drivetrain.bbType],
+          ['Зірка', s.drivetrain.chainring + 'T'],
+          ['Касета/тріщотка', LABELS.cassetteType[s.drivetrain.cassetteType] + ', ' + s.drivetrain.cassetteSpeeds + ' шв.'],
+          ['Задній перемикач', s.drivetrain.rearDerailleur + ' (' + s.drivetrain.derailleurSpeeds + ' шв.)'],
+          ['Передній перемикач', s.drivetrain.frontDerailleur],
+          ['Педалі', LABELS.pedals[s.drivetrain.pedals]]
+        ]
+      },
+      {
+        title: 'Гальма',
+        rows: [
+          ['Тип', LABELS.brakeType[s.brakes.brakeType]],
+          ...(s.brakes.isRim ? [] : [
+            ['Поршні', s.brakes.pistons],
+            ['Ротори', LABELS.rotorType[s.brakes.rotorType] + ', ' + s.brakes.rotorDiameter + ' мм']
+          ])
+        ]
+      },
+      {
+        title: 'Кермове керування',
+        rows: [
+          ['Кермо', s.cockpit.barWidth + ' мм, Ø' + s.cockpit.barDiameter],
+          ['Винос', LABELS.stemType[s.cockpit.stemType] + ', ' + s.cockpit.stemLength + ' мм, Ø' + s.cockpit.stemDiameter],
+          ['Грипси', LABELS.gripType[s.cockpit.gripType]],
+          ['Баренди', LABELS.barEnds[s.cockpit.barEnds]]
+        ]
+      },
+      {
+        title: 'Сідло',
+        rows: [
+          ['Сідло', LABELS.saddleType[s.saddle.saddleType]],
+          ['Дропер', LABELS.dropperType[s.saddle.dropperType]]
+        ]
+      },
+      {
+        title: 'Колір',
+        rows: [
+          ['Рама', s.colors.frameColor],
+          ['Грипси', s.colors.gripColor]
+        ]
+      }
+    ];
+  }
+
+  function renderSummary(s, total){
+    const groups = buildSummaryGroups(s);
+    const html = groups.map(g=>{
+      const rows = g.rows.map(r=>'<div class="summary-row"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>').join('');
+      return '<div class="summary-group"><h3>'+g.title+'</h3>'+rows+'</div>';
+    }).join('');
+
+    $('summaryBody').innerHTML = html;
+    $('totalPrice').textContent = fmt(total);
+  }
+
+  function renderBudget(total, budget){
+    const statusEl = $('budgetStatus');
+    const textEl = $('budgetStatusText');
+    statusEl.classList.remove('ok','tight','over');
+    if(!budget || budget <= 0){
+      statusEl.classList.add('tight');
+      textEl.textContent = 'Вкажіть бюджет для перевірки';
+      return;
+    }
+    if(total > budget){
+      statusEl.classList.add('over');
+      textEl.textContent = 'Перевищення бюджету на ' + fmt(total - budget) + ' ₴';
+    } else if(total >= budget * 0.9){
+      statusEl.classList.add('tight');
+      textEl.textContent = 'Впритул — запас ' + fmt(budget - total) + ' ₴';
+    } else {
+      statusEl.classList.add('ok');
+      textEl.textContent = 'В межах бюджету, запас ' + fmt(budget - total) + ' ₴';
+    }
+  }
+
+  /* ---------------- main update loop ---------------- */
+  function update(){
+    applyConstraints();
+    const s = readState();
+    const total = computePrice(s);
+    renderSummary(s, total);
+    renderBudget(total, s.budget.amount);
+  }
+
+  /* ---------------- submit ---------------- */
+  const ORDER_CONFIG = {
+    get botToken(){ return (window.DIMARIO_TG && window.DIMARIO_TG.botToken) || ''; },
+    get chatId(){ return (window.DIMARIO_TG && window.DIMARIO_TG.chatId) || ''; },
+    get telegramOrderLink(){ return (window.DIMARIO_TG && window.DIMARIO_TG.constructorLink) || 'https://t.me/+SpzKmo1Z16syNmIy'; },
+    get phone(){ return (window.DIMARIO_TG && window.DIMARIO_TG.phone) || '+380631446701'; }
+  };
+
+  async function sendOrderToTelegram(text){
+    if (typeof window.dimarioSendTelegram === 'function') {
+      return window.dimarioSendTelegram(text);
+    }
+    if(!ORDER_CONFIG.botToken || !ORDER_CONFIG.chatId) return false;
+    try {
+      const res = await fetch('https://api.telegram.org/bot' + ORDER_CONFIG.botToken + '/sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: ORDER_CONFIG.chatId,
+          text: text,
+          disable_web_page_preview: true
+        })
+      });
+      const data = await res.json();
+      return !!(data && data.ok);
+    } catch (e) {
+      console.error('Telegram send failed', e);
+      return false;
+    }
+  }
+
+  function buildOrderText(s, total){
+    const groups = buildSummaryGroups(s);
+    const lines = [];
+    lines.push('Заявка на збірку велосипеда — Dimario Bike Master');
+    lines.push("Ім'я/контакт: " + (s.budget.contact || '-'));
+    lines.push('Бюджет клієнта: ' + (s.budget.amount ? fmt(s.budget.amount) + ' ₴' : '-'));
+    lines.push('Розрахункова ціна збірки: ' + fmt(total) + ' ₴');
+    lines.push('');
+    groups.forEach(g=>{
+      lines.push(g.title + ':');
+      g.rows.forEach(r=>{
+        lines.push('  ' + r[0] + ': ' + r[1]);
+      });
+      lines.push('');
+    });
+    if(s.budget.wishes){
+      lines.push('Побажання: ' + s.budget.wishes);
+    }
+    return lines.join('\n').trim();
+  }
+
+  function copyToClipboard(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(text).catch(()=>{ fallbackCopy(text); });
+    }
+    fallbackCopy(text);
+    return Promise.resolve();
+  }
+
+  function fallbackCopy(text){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  const contactInput = $('contact');
+  const note = $('submitNote');
+
+  function showNote(text, kind){
+    note.textContent = text;
+    note.classList.remove('shown', 'error');
+    note.classList.add(kind === 'error' ? 'error' : 'shown');
+  }
+
+  function validateContact(){
+    const filled = contactInput.value.trim().length > 0;
+    contactInput.classList.toggle('field-invalid', !filled);
+    return filled;
+  }
+
+  contactInput.addEventListener('input', ()=>{
+    if(contactInput.value.trim().length > 0){
+      contactInput.classList.remove('field-invalid');
+    }
+  });
+
+  $('submitBtn').addEventListener('click', async function(){
+    if(!validateContact()){
+      showNote("Вкажіть ім'я та контакт — інакше ми не зможемо зв'язатися з вами.", 'error');
+      contactInput.focus();
+      return;
+    }
+
+    const s = readState();
+    const total = computePrice(s);
+    const order = {
+      id: 'order_' + Date.now(),
+      createdAt: new Date().toISOString(),
+      config: s,
+      estimatedPrice: total,
+      budgetStatus: !s.budget.amount ? 'unknown' : (total > s.budget.amount ? 'over' : (total >= s.budget.amount*0.9 ? 'tight' : 'ok'))
+    };
+
+    try{
+      const key = 'bikeConfiguratorOrders';
+      const existing = JSON.parse(localStorage.getItem(key) || '[]');
+      existing.push(order);
+      localStorage.setItem(key, JSON.stringify(existing));
+    }catch(e){
+      console.error('Не вдалося зберегти заявку в localStorage', e);
+    }
+
+    const orderText = buildOrderText(s, total);
+    const btn = $('submitBtn');
+    if(btn){ btn.disabled = true; btn.style.opacity = '0.7'; }
+    const sent = await sendOrderToTelegram(orderText);
+    if(btn){ btn.disabled = false; btn.style.opacity = ''; }
+
+    if(sent){
+      showNote('Заявку надіслано майстру в Telegram! Він відповість за контактами з форми.', 'ok');
+      setTimeout(()=>{ note.classList.remove('shown'); note.textContent = ''; }, 7000);
+      return;
+    }
+
+    // Fallback: clipboard + open TG
+    copyToClipboard(orderText).then(()=>{
+      window.open(ORDER_CONFIG.telegramOrderLink, '_blank', 'noopener');
+      showNote('Бот ще не налаштований. Текст скопійовано — вставте в Telegram (Ctrl+V) і надішліть.', 'ok');
+      setTimeout(()=>{
+        if(!note.classList.contains('error')){
+          note.classList.remove('shown');
+          note.textContent = '';
+        }
+      }, 9000);
+    });
+  });
+
+  $('callBtn').addEventListener('click', function(){
+    window.location.href = 'tel:' + ORDER_CONFIG.phone;
+  });
+
+  /* ---------------- init ---------------- */
+  updateFrameCalc();
+  update();
+})();
+</script>
+
+<script src="chatbot.js"></script>
+
+</body>
+</html>
